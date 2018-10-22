@@ -1,0 +1,13 @@
+tmp/*
+*.log
+.htaccess
+sitemap.xml
+sitemap.xml.gz
+wp-config.php
+html/assets/advanced-cache.php
+html/assets/backup-db/
+html/assets/backups/
+html/assets/upgrade/
+html/assets/uploads/
+html/assets/wp-cache-config.php
+test/wp-tests-config.php

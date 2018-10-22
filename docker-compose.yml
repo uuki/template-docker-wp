@@ -1,0 +1,37 @@
+version: '2'
+services:
+  wp:
+    build: ./container/wp
+    container_name: project_wp
+    volumes:
+      - ./container/wp/html/assets:/var/www/html/assets
+    ports:
+      - 80:80
+    links:
+      - mysql
+    environment:
+      DOMAIN: project.test
+      APACHE_DOCROOT: /var/www/html
+      APACHE_LOG_DIR: /var/log/apache2
+      PROJECT_NAME: project
+      WP_DB_HOST: mysql:3306
+      WP_DB_NAME: project
+      WP_DB_USER: example
+      WP_DB_PASSWORD: example_pass
+  mysql:
+    image: mysql:5.7.16
+    container_name: project_mysql
+    ports:
+      - 3306:3306
+    working_dir: /sql
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./sql:/sql
+    environment:
+      MYSQL_ROOT_PASSWORD: example_root_pass
+      MYSQL_DATABASE: project
+      MYSQL_USER: example
+      MYSQL_PASSWORD: example_pass
+volumes:
+  db-data:
+    driver: local
